@@ -19,8 +19,8 @@ cell = tuple(my_sheet)
 
 #获取代理商名称
 s = set()
-for i in range(my_sheet.max_row):
-    s.add(cell[i][1].value)
+for i in range(1,my_sheet.max_row):
+    s.add(str(cell[i][1].value))
 
 #查找保存
 def stockageDesDocuments(name: str):
@@ -28,7 +28,7 @@ def stockageDesDocuments(name: str):
     ws = w.active
     ws.append(["numéro","Agence","公司名","SIREN","未申报月份","Précisions"])
     for i in range(my_sheet.max_row):
-        if cell[i][1].value == name:
+        if str(cell[i][1].value) == name:
             row_data = []
             for j in range(0, my_sheet.max_column):
                 row_data.append(cell[i][j].value)
@@ -36,4 +36,4 @@ def stockageDesDocuments(name: str):
     w.save(name + ".xlsx")
 
 for name in iter(s):
-    stockageDesDocuments(name)
+    stockageDesDocuments(str(name))
