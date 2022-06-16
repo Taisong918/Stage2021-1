@@ -48,6 +48,12 @@ class CreateFolder:
         if not folder:
             os.makedirs(path)
 
+    def remove_suffix(self):
+        for file in self.file_list:
+            if "_CompressPdf" in file:
+                os.rename(self.path_pdf + os.sep + file, self.path_pdf + os.sep + file.replace("_CompressPdf", ""))
+        self.file_list = os.listdir(self.path)
+
     def create_folder(self):
         #1 第一层
         folder_name = self.date + " Paris 02 " + str(self.my_sheet.max_row - 1) + "家" #去除第一行
@@ -74,8 +80,6 @@ class CreateFolder:
 
     def move_docs(self, path_inner_inner: str, prefix: str):
         for file in self.file_list:
-            if "_CompressPdf" in file:
-                os.rename(self.path_pdf + os.sep + file, self.path_pdf + os.sep + file.replace("_CompressPdf", ""))
             if ".pdf" in file and prefix in file:
                 shutil.move(self.path_pdf + os.sep + file, path_inner_inner + os.sep + file)
 
@@ -105,10 +109,14 @@ class CreateFolder:
             row[11] = str(self.cell[i][11].value)
             docs.append(row)
             cpt += 1
+            # 出现空白表格跳出
+            if self.cell[i][1].value is None:
+                break
         date = time.strftime("%d.%m.%Y", time.localtime())
         doc.save(self.path + os.sep + date + " Créations M0 - " + str(self.my_sheet.max_row - 1) + "sociétés.xlsx")
 
 file_name = os.getcwd()
 cf = CreateFolder(file_name)
+cf.remove_suffix()
 cf.create_folder()
 cf.create_xlsx_doc()
