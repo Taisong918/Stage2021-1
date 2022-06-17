@@ -22,7 +22,7 @@ class CreateFolder:
         #读取文件
         self.path = path
         self.file_list = os.listdir(self.path)
-        file_name: str = None
+        file_name: str = ""
         for file in self.file_list:
             if ".xlsx" in file:
                 file_name = file
