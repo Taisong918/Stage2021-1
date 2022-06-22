@@ -1,3 +1,4 @@
+import os
 import time
 
 import tkinter as tk
@@ -216,7 +217,7 @@ dictm0d = {
     ' ': float(1 / 86),
 }
 
-input = load_workbook("模板\\模板.xlsx")
+input = load_workbook("模板"+ os.sep +"模板.xlsx")
 inputpage = input.active
 
 output = Workbook()

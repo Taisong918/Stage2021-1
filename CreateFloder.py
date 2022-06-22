@@ -87,9 +87,8 @@ class CreateFolder:
     def create_xlsx_doc(self):
         doc = Workbook()
         docs = doc.active
-        row = ["N° 编号", "Date d’envoi 发送日期", "Nom 公司名", "Code Postal 邮政编码", "Ville 公司所在城市", "Pays 国家",
-               "Date de début d’acitivité 业务开始时间", "Activités 业务内容", "Nom du correspondant 联系人姓名", "Complément d’adresse 补充地址",
-               "Adresse 地址", "Date de signature 签字日期", "TVA 增值税"]
+        row = ["N°", "Date d’envoi", "Nom", "Code Postal", "Ville", "Pays","Date de début d’acitivité",
+               "Activités", "Nom du correspondant", "Complément d’adresse", "Adresse", "Date de signature", "TVAs"]
         docs.append(row)
         row[1] = time.strftime("%d/%m/%Y", time.localtime())
         row[5] = "Chine"
