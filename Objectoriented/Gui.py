@@ -3,6 +3,7 @@
 from tkinter import *
 import time
 from tkinter import filedialog
+import Separate
 
 LOG_LINE_NUM = 0
 ENTRY_WIDTH = 45
@@ -10,6 +11,7 @@ ENTRY_WIDTH = 45
 class MY_GUI:
 
     def __init__(self, init_window_name):
+        self.output_path_entry = None
         self.output_path_button = None
         self.init_output_path_label = None
         self.folder_path_entry = None
@@ -26,7 +28,7 @@ class MY_GUI:
         self.init_separate_label = None
         self.init_folder_path_label = None
         self.init_file_path_label = None
-        
+
         self.file_path = StringVar()
         self.folder_path = StringVar()
         self.output_path = StringVar()
@@ -65,7 +67,7 @@ class MY_GUI:
         self.output_path_button = Button(self.init_window_name, text="OutputFolder", bg="lightblue", width= 10, command=self.set_output_folder)
         self.output_path_button.grid(row=6, column=11)
 
-        self.separate_button = Button(self.init_window_name, text="Separate", bg="lightblue", width=10)
+        self.separate_button = Button(self.init_window_name, text="Separate", bg="lightblue", width=10, command=self.separate)
         self.separate_button.grid(row=10, column=11)
         self.create_folder_button = Button(self.init_window_name, text="CreateFloder", bg="lightblue", width=10)
         self.create_folder_button.grid(row=11, column=11)
@@ -112,6 +114,10 @@ class MY_GUI:
         self.output_path = filedialog.askdirectory(title='选择文件夹')
         self.output_path_entry.delete(0, "end")
         self.output_path_entry.insert(0, self.output_path)
+
+    #实现功能函数
+    def separate(self):
+        Separate.Separate(self.output_path, self.file_path).classification()
 
 
 

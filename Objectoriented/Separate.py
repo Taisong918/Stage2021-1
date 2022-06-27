@@ -22,6 +22,12 @@ class Separate:
         self.my_sheet = self.wb.active
         self.cell = tuple(self.my_sheet)
 
+    def __init__(self, output_path, file_name):
+        self.path = output_path
+        self.wb = load_workbook(file_name, read_only=True)
+        self.my_sheet = self.wb.active
+        self.cell = tuple(self.my_sheet)
+
     def classification(self):
         row = ["Numéro", "Agence", "", "", "", "", "SIRENE", "", "", "", "", "", "", "", "", "SIRENE", "", "", "", "",
                "NOM CN"]
@@ -69,15 +75,15 @@ class Separate:
                     case _:
                         sie_autres.append(row)
 
-        self.storing_documents("SIE PARIS 2EME.xlsx", sie_paris2)
-        self.storing_documents("SIE PARIS 16 CHAILLOT.xlsx", sie_paris16)
-        self.storing_documents("SIE BONNEVILLE.xlsx", sie_bonneville)
-        self.storing_documents("SIE ANNECY.xlsx", sie_annency)
-        self.storing_documents("SIE VIDE.xlsx", sie_vide)
-        self.storing_documents("SIE AUTRE.xlsx", sie_autre)
+        self.storing_documents(self.path + os.sep + "SIE PARIS 2EME.xlsx", sie_paris2)
+        self.storing_documents(self.path + os.sep + "SIE PARIS 16 CHAILLOT.xlsx", sie_paris16)
+        self.storing_documents(self.path + os.sep + "SIE BONNEVILLE.xlsx", sie_bonneville)
+        self.storing_documents(self.path + os.sep + "SIE ANNECY.xlsx", sie_annency)
+        self.storing_documents(self.path + os.sep + "SIE VIDE.xlsx", sie_vide)
+        self.storing_documents(self.path + os.sep + "SIE AUTRE.xlsx", sie_autre)
 
     def storing_documents(self, name: str, w: Workbook):
         w.save(name)
 
 
-Separate().classification()
+#Separate().classification()
