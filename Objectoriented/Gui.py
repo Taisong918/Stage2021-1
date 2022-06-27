@@ -5,10 +5,28 @@ import time
 from tkinter import filedialog
 
 LOG_LINE_NUM = 0
+ENTRY_WIDTH = 45
 
 class MY_GUI:
 
     def __init__(self, init_window_name):
+        self.output_path_button = None
+        self.init_output_path_label = None
+        self.folder_path_entry = None
+        self.file_path_entry = None
+        self.merger_button = None
+        self.create_folder_button = None
+        self.separate_button = None
+        self.init_create_folder_label = None
+        self.folder_path_button = None
+        self.file_path_button = None
+        self.log_data_Text = None
+        self.log_label = None
+        self.init_merger_label = None
+        self.init_separate_label = None
+        self.init_folder_path_label = None
+        self.init_file_path_label = None
+        
         self.file_path = StringVar()
         self.folder_path = StringVar()
         self.output_path = StringVar()
@@ -24,11 +42,13 @@ class MY_GUI:
         self.init_file_path_label.grid(row=2, column=0)
         self.init_folder_path_label = Label(self.init_window_name, text="选择多个文件所在文件夹位置")
         self.init_folder_path_label.grid(row=4, column=0)
+        self.init_output_path_label = Label(self.init_window_name, text="选择结果输出位置")
+        self.init_output_path_label.grid(row=6, column=0)
 
         self.init_separate_label = Label(self.init_window_name, text="功能一: 分割总表")
         self.init_separate_label.grid(row=10, column=0)
-        self.init_create_floder_label = Label(self.init_window_name, text="功能二: 分类M0PDF,自动生成Excel汇总文件")
-        self.init_create_floder_label.grid(row=11, column=0)
+        self.init_create_folder_label = Label(self.init_window_name, text="功能二: 分类M0PDF,自动生成Excel汇总文件")
+        self.init_create_folder_label.grid(row=11, column=0)
         self.init_merger_label = Label(self.init_window_name, text="功能三: 合并JUJUBE扫描后的文件")
         self.init_merger_label.grid(row=12, column=0)
 
@@ -42,19 +62,23 @@ class MY_GUI:
         self.file_path_button.grid(row=2, column=11)
         self.folder_path_button = Button(self.init_window_name, text="OpenFolder", bg="lightblue", width=10, command=self.open_folder)
         self.folder_path_button.grid(row=4, column=11)
+        self.output_path_button = Button(self.init_window_name, text="OutputFolder", bg="lightblue", width= 10, command=self.set_output_folder)
+        self.output_path_button.grid(row=6, column=11)
 
         self.separate_button = Button(self.init_window_name, text="Separate", bg="lightblue", width=10)
         self.separate_button.grid(row=10, column=11)
-        self.create_floder_button = Button(self.init_window_name, text="CreateFloder", bg="lightblue", width=10)
-        self.create_floder_button.grid(row=11, column=11)
+        self.create_folder_button = Button(self.init_window_name, text="CreateFloder", bg="lightblue", width=10)
+        self.create_folder_button.grid(row=11, column=11)
         self.merger_button = Button(self.init_window_name, text="Merger", bg="lightblue", width=10)
         self.merger_button.grid(row=12, column=11)
 
         #Entry
-        self.file_path_entry = Entry(self.init_window_name, width=45)
+        self.file_path_entry = Entry(self.init_window_name, width=ENTRY_WIDTH)
         self.file_path_entry.grid(row=3)
-        self.folder_path_entry = Entry(self.init_window_name, width=45)
+        self.folder_path_entry = Entry(self.init_window_name, width=ENTRY_WIDTH)
         self.folder_path_entry.grid(row=5)
+        self.output_path_entry = Entry(self.init_window_name, width=ENTRY_WIDTH)
+        self.output_path_entry.grid(row=7)
 
     #获取当前时间
     def get_current_time(self):
@@ -83,6 +107,11 @@ class MY_GUI:
         self.folder_path = filedialog.askdirectory(title='选择文件夹')
         self.folder_path_entry.delete(0, "end")
         self.folder_path_entry.insert(0, self.folder_path)
+
+    def set_output_folder(self):
+        self.output_path = filedialog.askdirectory(title='选择文件夹')
+        self.output_path_entry.delete(0, "end")
+        self.output_path_entry.insert(0, self.output_path)
 
 
 
